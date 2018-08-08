@@ -1,6 +1,6 @@
 {
     "name": "@arted/css-loader",
-    "version": "0.0.1",
+    "version": "0.0.101",
     "description": "css loader for webpack",
     "main": "loader.js",
     "scripts": {
@@ -9,5 +9,9 @@
     },
     "repository": "git@github.com:edonet/css-loader.git",
     "author": "edonet <edonet@163.com>",
-    "license": "MIT"
+    "license": "MIT",
+    "dependencies": {
+        "css-loader": "^1.0.0",
+        "loader-utils": "^1.1.0"
+    }
 }
