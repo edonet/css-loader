@@ -1,0 +1,13 @@
+{
+    "name": "@arted/css-loader",
+    "version": "0.0.1",
+    "description": "css loader for webpack",
+    "main": "loader.js",
+    "scripts": {
+        "build": "drap lib build",
+        "release": "yarn build && cd build && yarn publish"
+    },
+    "repository": "git@github.com:edonet/css-loader.git",
+    "author": "edonet <edonet@163.com>",
+    "license": "MIT"
+}
