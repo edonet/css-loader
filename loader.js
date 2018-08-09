@@ -15,7 +15,7 @@
 const
     utils = require('loader-utils'),
     cssLoader = require('css-loader'),
-    isProduction = process.env.BABEL_ENV === 'production',
+    isProduction = process.env.NODE_ENV === 'production',
     cssLoaderOptions = {
         minimize: isProduction,
         modules: true,
@@ -23,25 +23,6 @@ const
         camelCase: 'dashes',
         localIdentName: '[local]-[hash:base64:8]'
     };
-
-
-/**
- *****************************************
- * 定义模板
- *****************************************
- */
-const code = `
-    if (exports.locals) {
-        var locals = exports.locals;
-
-        // 更新模块
-        exports.locals = {
-            __esModule: true,
-            default: locals,
-            use: require("${ require.resolve('./styled.js') }").default(locals)
-        };
-    }
-`;
 
 
 /**
@@ -66,23 +47,6 @@ module.exports = function loader(...args) {
     if (options.global) {
         options.modules = false;
     }
-
-    // 拦截返回
-    proxy.async = () => {
-        let callback = this.async();
-
-        // 返回挂载回调
-        return (...result) => {
-
-            // 添加模块对焦
-            if (options.modules && result[1]) {
-                result[1] += code;
-            }
-
-            // 执行回调
-            callback.apply(this, result);
-        };
-    };
 
     // 加载代码
     return cssLoader.apply(proxy, args);
